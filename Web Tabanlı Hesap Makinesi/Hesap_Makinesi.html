@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="cerceve">
+        <form name="makine">
+            <!--Yapılan işlemi tutması için oluşturulan bir label-->
+            <label for="islem"></label>   
+
+            <!--İşlem ve sonuçların gözükeceği hesap makinesi ekranları için oluşturulmuş textbox'lar-->
+            <input type="text" name="IslemEkrani" class="IslemEkrani" readonly><br>
+            <input type="text" name="ekran" class="ekran" id="islem" readonly><br>
+
+            <!--Hesap makinesi tuşları. csste farklı görünümler verileceği için farklı classlardalar. buttonlara basıldığında aşağıdaki ilgili fonksiyonları kullanıyolar-->
+            <input type="button" class="C_button" value="C" onclick="Temizle()">
+            <input type="button" class="Del_button" value="DEL" onclick="Sil()">
+            <input type="button" class="islem_button" value="÷" onclick="SembolEkle('/')"><br>
+
+            <input type="button" class="button" value="7" onclick="SayiEkle('7')">
+            <input type="button" class="button" value="8" onclick="SayiEkle('8')">
+            <input type="button" class="button" value="9" onclick="SayiEkle('9')">
+            <input type="button" class="islem_button" value="X" onclick="SembolEkle('*')"><br>
+
+            <input type="button" class="button" value="4" onclick="SayiEkle('4')">
+            <input type="button" class="button" value="5" onclick="SayiEkle('5')">
+            <input type="button" class="button" value="6" onclick="SayiEkle('6')">
+            <input type="button" class="islem_button" value="-" onclick="SembolEkle('-')"><br>
+
+            <input type="button" class="button" value="1" onclick="SayiEkle('1')">
+            <input type="button" class="button" value="2" onclick="SayiEkle('2')">
+            <input type="button" class="button" value="3" onclick="SayiEkle('3')">
+            <input type="button" class="islem_button" value="+" onclick="SembolEkle('+')"><br>
+
+            <input type="button" class="button" value="." onclick="NoktaEkle()">
+            <input type="button" class="button" value="0" onclick="SayiEkle('0')">
+            <input type="button" class="Equal_button" value="=" onclick="Hesapla()"><br>
+        </form>
+    </div>
+
+    <script>
+        // Sonucun ekranda olup olmadığını gösteren bool.
+        let SonucVar = false;
+
+        // İşlem ve sonuc ekranını temizler. C tuşuna basıldığında çağırılır.
+        function Temizle() {
+            document.makine.ekran.value = '';
+            document.makine.IslemEkrani.value = '';
+            SonucVar = false;
+        }
+
+        // Alt(sonuç) ekrandaki en son karakteri siler. DEL tuşuna basıldığında çağırılır.
+        function Sil() {
+            document.makine.ekran.value = document.makine.ekran.value.slice(0, -1);
+        }
+
+        // Basılan tuştaki sayıyı ekrana yazar. 
+        function SayiEkle(Sayi) {
+            if (SonucVar) {
+                // Ekranda sonuç varsa sonuç yerine yeni sayı yazılır ve işlem ekranı sıfırlanır.
+                document.makine.ekran.value = Sayi;
+                document.makine.IslemEkrani.value = '';
+                SonucVar = false;
+            } else {
+                // Ekranda sonuç yoksa sayı son karakter olarak eklenir.
+                document.makine.ekran.value += Sayi;
+            }
+        }
+
+        // Basılan tuştaki sembolü ekrana yazar.
+        function SembolEkle(Sembol) {
+            const SonChar = document.makine.ekran.value.slice(-1);
+
+            if (SonucVar) {
+                // Ekranda sonuç varsa işlem ekranı sıfırlanır ve sonuç üzerinden işleme devam edilebilir.
+                document.makine.IslemEkrani.value = '';
+                SonucVar = false;
+            }
+
+            if (SonChar === '+' || SonChar === '-' || SonChar === '*' || SonChar === '/') {
+                // Son karakter sembolse sembolü yenisiyle değiştirir.
+                document.makine.ekran.value = document.makine.ekran.value.slice(0, -1) + Sembol;
+            } else {
+                // Yeni sembol ekler.
+                document.makine.ekran.value += Sembol;
+            }
+        }
+
+        function NoktaEkle() {
+            const SonChar = document.makine.ekran.value.slice(-1);
+
+            if (SonucVar) {
+                // Ekranda sonuç varken "." ya basılınca sonuç yerine "0." yazar ve işlem ekranı temizlenir.
+                document.makine.ekran.value = '0.';
+                document.makine.IslemEkrani.value = '';
+                SonucVar = false;
+            } else if (SonChar !== '.') {
+                // Son karakter nokta değilse ekrana "." ekler.
+                document.makine.ekran.value += '.';
+            }
+        }
+
+        function Hesapla() {
+            //ifade = islem
+            const ifade = document.makine.islem.value;
+            try {
+                // ifadenin (islemin) içindeki denklemin sonucunu bulur. sonucu ekrana işlemide işlem ekranına yazar
+                const Sonuc = eval(ifade);
+                document.makine.IslemEkrani.value = `${ifade} = `;
+                document.makine.ekran.value = Sonuc;
+                SonucVar = true;
+            } catch (error) {
+                //Hatalı girişlerde işlem ekranına "Hatalı işlem" yazar ve sonuç ekranı temizlenir
+                document.makine.IslemEkrani.value = "Hatalı İşlem";
+                document.makine.ekran.value = "";
+            }
+        }
+    </script>
+</body>
+
+</html>
