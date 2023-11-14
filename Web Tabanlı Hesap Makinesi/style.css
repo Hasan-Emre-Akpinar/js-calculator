@@ -8,6 +8,7 @@
     padding: 15px;
     margin: 10%;
     background-color: rgb(150, 150, 150);
+    border-radius: 10px;
 }
 
 .IslemEkrani{
@@ -16,6 +17,10 @@
     text-align: right;
     margin-bottom: -5px;
     width: 314px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius:  0px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 
 input{
@@ -25,6 +30,8 @@ input{
     margin-bottom: 5px;
     box-shadow: none;
     border-top: 0px;
+    border-bottom-left-radius:  10px;
+    border-bottom-right-radius:  10px;
 }
 
 .button{
@@ -35,7 +42,13 @@ input{
     text-align: center;
     border-color: lightgray;
     background-color: rgb(230,230,230);
-    border-color: rgb(200,200,200);
+    box-shadow: 0 6px 0 rgb(100,100,100);
+    border: none;
+    border-radius: 10px;
+}
+.button:active{
+    box-shadow: none;
+    transform: translateY(6px); 
 }
 
 .islem_button{
@@ -45,7 +58,13 @@ input{
     font-size: 25px;
     text-align: center;
     background-color: rgb(250,250,250);
-    border-color: rgb(200,200,200);
+    box-shadow: 0 6px 0 rgb(100,100,100);
+    border: none;
+    border-radius: 10px;
+}
+.islem_button:active{
+    box-shadow: none;
+    transform: translateY(6px);
 }
 
 .Equal_button{
@@ -56,7 +75,13 @@ input{
     color: rgb(250,250,250);
     text-align: center;
     background-color: rgb(50, 100, 150);
-    border-color: rgb(200,200,200);
+    box-shadow: 0 6px 0 rgb(0,50,100);
+    border: none;
+    border-radius: 10px;
+}
+.Equal_button:active{
+    box-shadow: none;
+    transform: translateY(6px);
 }
 
 .C_button{
@@ -67,7 +92,13 @@ input{
     color: rgb(250,250,250);
     text-align: center;
     background-color: rgb(196, 13, 68);
-    border-color: rgb(200,200,200);
+    box-shadow: 0 6px 0 rgb(100,0,0);
+    border: none;
+    border-radius: 10px;
+}
+.C_button:active{
+    box-shadow: none;
+    transform: translateY(6px); 
 }
 
 .Del_button{
@@ -78,6 +109,12 @@ input{
     color: rgb(250,250,250);
     text-align: center;
     background-color: rgb(196, 13, 68);
-    border-color: rgb(200,200,200);
+    box-shadow: 0 6px 0 rgb(100,0,0);
+    border: none;
+    border-radius: 10px;
+}
+.Del_button:active{
+    box-shadow: none;
+    transform: translateY(6px); 
 }
 
