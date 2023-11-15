@@ -19,7 +19,10 @@
 
             <!--Hesap makinesi tuşları. csste farklı görünümler verileceği için farklı classlardalar. buttonlara basıldığında aşağıdaki ilgili fonksiyonları kullanıyolar-->
             <input type="button" class="C_button" value="C" onclick="Temizle()">
-            <input type="button" class="Del_button" value="DEL" onclick="Sil()">
+            <input type="button" class="Del_button" value="DEL" onclick="Sil()"><br>
+            <input type="button" class="islem_button" value="1/x" onclick="TersÇevir()">
+            <input type="button" class="islem_button" value="x²" onclick="KareAl()">
+            <input type="button" class="islem_button" value="√x" onclick="KökAl()">
             <input type="button" class="islem_button" value="÷" onclick="SembolEkle('/')"><br>
 
             <input type="button" class="button" value="7" onclick="SayiEkle('7')">
@@ -120,6 +123,28 @@
                 document.makine.ekran.value = "";
             }
         }
+        
+        function KareAl() {
+                var Sayi = document.getElementById("islem").value;
+                document.makine.ekran.value = Sayi * Sayi;
+                document.makine.IslemEkrani.value = `(${Sayi})² = `;
+                SonucVar = true;
+        }
+
+        function KökAl() {
+                Sayi = document.getElementById("islem").value;
+                document.makine.ekran.value = Math.sqrt(Sayi);
+                document.makine.IslemEkrani.value = `√(${Sayi}) = `;
+                SonucVar = true;
+        }
+
+        function TersÇevir() {
+                Sayi = document.getElementById("islem").value;
+                document.makine.ekran.value = 1 / Sayi;
+                document.makine.IslemEkrani.value = "1 / " + `${Sayi} = `;
+                SonucVar = true;
+        }
+        
     </script>
 </body>
 
